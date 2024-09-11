@@ -1,5 +1,5 @@
 	/* A4 paper style */
-	.a4-paper {
+	/* .a4-paper {
 		width: 210mm;
 		height: 297mm;
 		margin: 0 auto;
@@ -9,7 +9,31 @@
 		border: 1px solid #ccc;
 		overflow: hidden;
 		break-after: page;
+	} */
+
+	* {
+		box-sizing: border-box;
 	}
+
+	.a4-paper {
+		width: calc(100vh / 1.414);
+		/* 根據螢幕高度計算 A4 寬度 */
+		height: calc(100vh - 18px);
+		/* 高度等於螢幕高度 */
+		margin: 0 auto;
+		padding: 2rem;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border: 1px solid #ccc;
+		overflow: hidden;
+
+		margin-bottom: 0.5rem;
+	}
+
 	body {
 		background-color: #ebebeb;
+	}
+
+	:root {
+		font-size: 1.4vh;
 	}
