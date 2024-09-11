@@ -1,0 +1,15 @@
+	/* A4 paper style */
+	.a4-paper {
+		width: 210mm;
+		height: 297mm;
+		margin: 0 auto;
+		padding: 20mm;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border: 1px solid #ccc;
+		overflow: hidden;
+		break-after: page;
+	}
+	body {
+		background-color: #ebebeb;
+	}
