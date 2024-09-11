@@ -1,0 +1,6 @@
+# 使用tab縮排 大小為4
+root = true
+
+[*]
+indent_style = tab
+indent_size = 4
