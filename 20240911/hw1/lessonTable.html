@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>國小課表</title>
+</head>
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+		text-align: center;
+	}
+	th {
+		padding: 0 20px;
+	}
+
+	/* A4 paper style */
+	.a4-paper {
+		width: 210mm;
+		height: 297mm;
+		margin: 0 auto;
+		padding: 20mm;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border: 1px solid #ccc;
+		overflow: hidden;
+		break-after: page;
+	}
+	body {
+		background-color: #ebebeb;
+	}
+</style>
+
+<body>
+	<div class="a4-paper">
+
+		<table  align="center">
+			<!-- <caption>國小課表</caption> -->
+			<tr>
+				<th colspan="2">節數</th>
+				<th>一</th>
+				<th>二</th>
+				<th>三</th>
+				<th>四</th>
+				<th>五</th>
+			</tr>
+			<!-- 早自習 -->
+			<tr>
+				<td colspan="2">
+					早自習<br>
+					0750~0830
+				</td>
+				<td colspan="5"></td>
+			</tr>
+	
+			<!-- 第一節 -->
+			<tr>
+				<td colspan="2">
+					第一節<br>
+					0840~0920
+				</td>
+				<td rowspan="2">
+					國語<br>
+					劉展華
+				</td>
+				<td colspan="3">
+					數學<br>
+					劉展華
+				</td>
+				<td>
+					國語<br>
+					劉展華
+				</td>
+			</tr>
+	
+			<!-- 第二節 -->
+			<tr>
+				<td colspan="2">
+					第二節<br>
+					0930~1010
+				</td>
+				<td>
+					自然<br>
+					黃新民
+				</td>
+				<td>
+					音樂<br>
+					萬巧如
+				</td>
+				<td>
+					國語<br>
+					劉展華
+				</td>
+				<td>
+					彈性<br>
+					劉展華
+				</td>
+			</tr>
+	
+			<!-- 第三節 -->
+			<tr>
+				<td colspan="2">
+					第三節<br>
+					1030~1100
+				</td>
+				<td>
+					數學<br>
+					劉展華
+				</td>
+				<td>
+					健康<br>
+					潘文欽
+				</td>
+				<td>
+					國語<br>
+					劉展華
+				</td>
+				<td>
+					鄉土<br>
+					魏士欽
+				</td>
+				<td rowspan="2">
+					自然<br>
+					黃新民
+				</td>
+			</tr>
+	
+			<!-- 第四節 -->
+			<tr>
+				<td colspan="2">
+					第四節<br>
+					1110~1200
+				</td>
+				<td>
+					英語<br>
+					黃定宜
+				</td>
+				<td>
+					彈性<br>
+					劉展華
+				</td>
+				<td>
+					社會<br>
+					劉展華
+				</td>
+				<td>
+					英語<br>
+					黃定宜
+				</td>
+			</tr>
+	
+			<!-- 午休時間 -->
+			<tr>
+				<td colspan="2">午休時間<br>1200~1320</th>
+				<td colspan="5"></td>
+			</tr>
+	
+			<!-- 第五節 -->
+			<tr>
+				<td colspan="2">
+					第五節<br>
+					1330~1410
+				</td>
+				<td>
+					社會<br>
+					劉展華
+				</td>
+				<td rowspan="2">
+					美勞<br>
+					許文杰
+				</td>
+				<td rowspan="3">
+				</td>
+				<td rowspan="3">
+					綜合<br>
+					劉展華
+				</td>
+				<td>
+					體育<br>
+					潘文欽
+				</td>
+			</tr>
+	
+			<!-- 第六節 -->
+			<tr>
+				<td colspan="2">
+					第六節<br>
+					1420~1500
+				</td>
+				<td>
+					體育<br>
+					潘文欽
+				</td>
+				<td>
+					國語<br>
+					劉展華
+				</td>
+			</tr>
+	
+			<!-- 第七節 -->
+			<tr>
+				<td colspan="2">
+					第七節<br>
+					1520~1600
+				</td>
+				<td colspan="2">
+					彈性<br>
+					劉展華
+				</td>
+				<td>
+					社會<br>
+					劉展華
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>
