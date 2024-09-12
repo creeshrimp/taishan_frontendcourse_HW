@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抄來的判斷星座</title>
+</head>
+
+<body>
+    <script>
+
+        const birth_M = prompt('請輸入出生月份')
+        const birth_D = prompt('請輸入出生日期')
+
+        alert(getAstro(birth_M, birth_D))
+
+        // 根据生日的月份和日期，计算星座。  http://blog.csdn.net/cuixiping/
+        function getAstro(m, d) {
+            return "魔羯水瓶雙魚牡羊金牛雙子巨蟹獅子處女天秤天蠍射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2);
+        }
+
+    </script>
+</body>
+
+</html>
