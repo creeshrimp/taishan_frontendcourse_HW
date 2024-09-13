@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天數計算機</title>
+</head>
+
+<body>
+    <input type="number" placeholder="年" id="year">
+    <input type="number" placeholder="月" id="mounth">
+    <input type="number" placeholder="日" id="date">
+    <input type="button" value="輸入" onclick="btnClick()"><br>
+    <div id="result">請輸入年月日</div>
+    <script>
+        // 大月
+
+        function btnClick() {
+            // 取得年月日的輸入值
+            const year = document.querySelector('#year').value
+            const mounth = document.querySelector('#mounth').value
+            const date = document.querySelector('#date').value
+
+            let result_string = ''
+
+            result.innerHTML = result_string
+        }
+    </script>
+</body>
+
+</html>
