@@ -14,28 +14,27 @@
 
         /* 預設input filled 顏色修改 */
         input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0px 1000px #232325 inset;
-            /* 改成黑色 */
             box-shadow: 0 0 0px 1000px #232325 inset;
+            -webkit-box-shadow: 0 0 0px 1000px #232325 inset;
             -webkit-text-fill-color: #b3b3b3;
-            /* 字體顏色改成白色以符合黑色背景 */
         }
 
         /* 移除 input 預設 highlight */
         input:focus {
             outline: none;
-            box-shadow: none;
         }
 
         /* Chrome, Safari, Edge, Opera 移除箭頭 */
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
+            appearance: none;
             -webkit-appearance: none;
             margin: 0;
         }
 
         /* Firefox 移除箭頭 */
         input[type="number"] {
+            appearance: textfield;
             -moz-appearance: textfield;
         }
 
