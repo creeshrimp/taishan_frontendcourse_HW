@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --dice-padding: 10%;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            min-width: max-content;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .dice{
+            width: 200px;
+            height: 200px;
+            background-color: gray;
+            border: 2px solid black;
+
+            display: inline-block;
+            border-radius: 10%;
+
+            position: relative;
+
+            /* 漸層 */
+            background: linear-gradient(45deg, rgb(213 212 212) 0%, rgba(255, 255, 255, 1) 100%);
+            /* 陰影 */
+            box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.6);
+        }
+        .dot{
+            position: absolute;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+        }
+        .red{
+            background-color: red;
+        }
+        .black{
+            background-color: black;
+        }
+        .center{
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .left-top{
+            top: var(--dice-padding);
+            left: var(--dice-padding);
+        }
+        .top{
+            top: var(--dice-padding);
+        }
+        .right-top{
+            top: var(--dice-padding);
+            right: var(--dice-padding);
+        }
+        .left{
+            left: var(--dice-padding);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .right{
+            right: var(--dice-padding);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .left-bottom{
+            bottom: var(--dice-padding);
+            left: var(--dice-padding);
+        }
+        .bottom{
+            bottom: var(--dice-padding);
+        }
+        .right-bottom{
+            bottom: var(--dice-padding);
+            right: var(--dice-padding);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dice">
+            <span class="dot red center"></span>
+        </div>
+        <div class="dice">
+            <span class="dot black left-top"></span>
+            <span class="dot black right-bottom"></span>
+        </div>
+        <div class="dice">
+            <span class="dot black left-top"></span>
+            <span class="dot black center"></span>
+            <span class="dot black right-bottom"></span>
+        </div>
+        <div class="dice">
+            <span class="dot red left-top"></span>
+            <span class="dot red right-top"></span>
+            <span class="dot red right-bottom"></span>
+            <span class="dot red left-bottom"></span>
+        </div>
+        <div class="dice">
+            <span class="dot black left-top"></span>
+            <span class="dot black right-top"></span>
+            <span class="dot black center"></span>
+            <span class="dot black left-bottom"></span>
+            <span class="dot black right-bottom"></span>
+        </div>
+        <div class="dice">
+            <span class="dot black left-top"></span>
+            <span class="dot black right-top"></span>
+            <span class="dot black left"></span>
+            <span class="dot black right"></span>
+            <span class="dot black left-bottom"></span>
+            <span class="dot black right-bottom"></span>
+        
+        </div>
+    </div>
+</body>
+
+</html>
