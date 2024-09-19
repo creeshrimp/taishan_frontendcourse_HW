@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex1</title>
+</head>
+
+<body>
+    <script>
+        // 買饅頭
+        const mantoCounts = [1, 8, 3, 4, 5, 6, 7, 2, 9, 10]
+
+        // for of
+        let mantoPrice = 1
+        // for (const mantoCount of mantoCounts) {
+        //     mantoCount * mantoPrice
+        //     console.log(mantoCount * mantoPrice)
+        //     mantoPrice++
+        // }
+
+        // for in
+        let sum = 0
+        for (const index in mantoCounts) {
+            // console.log(index + 1)
+            sum += mantoCounts[index] * (+index + 1)    // 須注意 index 是字串!!!!! 須轉型!!!
+        }
+        console.log(sum)
+
+
+        // forEach
+        let sum2 = 0
+        mantoCounts.forEach((mantoCount, index) => {
+            // console.log(index + 1)      // forEach 的index就很正常是數字
+            sum2 += mantoCount * (index + 1)
+        })
+        console.log(sum2)
+    </script>
+</body>
+
+</html>
