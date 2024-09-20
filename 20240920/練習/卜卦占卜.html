@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卜卦占卜</title>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="text-center">卜卦占卜(不準)</h2>
+    <script>
+        const gua = ([xia_n, shan_n, yao_n]) => {
+            const guaStr = '乾兌離震巽坎艮坤'
+            const guaArr = [
+                guaStr[(xia_n - 1) % 8], guaStr[(shan_n - 1) % 8], yao_n % 6
+            ]
+            return guaArr
+        }
+
+        // 輸入 435 692 734
+        const number1 = parseInt(prompt('第一個數字'))
+        const number2 = parseInt(prompt('第二個數字'))
+        const number3 = parseInt(prompt('第三個數字'))
+        const numbers = [number1, number2, number3]
+        const result = gua(numbers)
+        console.log(result[0]) // 輸出 離
+        console.log(result[1]) // 輸出 震
+        console.log(result[2]) // 輸出 2
+    </script>
+
+    <h1 class="text-center">
+        <script>
+            // document.write
+            document.write(`下[${result[1]}]上[${result[0]}]，變爻${result[2]}`)
+        </script>
+    </h1>
+</body>
+
+</html>

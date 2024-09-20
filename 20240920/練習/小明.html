@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小明愛數數</title>
+</head>
+
+<body>
+    <script>
+        const calculate = (n, m) => {
+            let start_n = n
+            let sum = n
+            while (sum <= m) {
+                n++
+                sum += n
+            }
+            return n - start_n + 1
+        }
+
+        const number1 = parseInt(prompt('n', 1)) || 1
+        const number2 = parseInt(prompt('m', 5)) || 5
+        console.log(calculate(number1, number2))
+    </script>
+</body>
+
+</html>
