@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const weeks = ['一', '二', '三', '四']
+        const times = ['一', '二', '三']
+        const data = [
+            [18.2, 17.3, 15.0, 13.4],
+            [23.8, 25.1, 20.6, 17.8],
+            [20.6, 21.5, 18.4, 15.7]
+        ]
+
+    </script>
+
+    <!-- 用 array.join -->
+    <!-- <table border="1">
+        <script>
+            // row 1
+            document.write(`
+                <tr>
+                    <td></td>
+                    <td>星期${weeks.join('</td><td>星期')}</td>
+                </tr>
+            `)
+
+            // row 2~4
+            for (const i in data) {
+                document.write(`
+                    <tr>
+                        <td>時段${times[i]}</td>
+                        <td>${data[i].join('</td><td>')}</td>
+                    </tr>
+                `)
+            }
+        </script>
+    </table> -->
+
+    <!-- 用 for in -->
+    <!-- <table border="1">
+        <script>
+            // row 1
+            document.write(`
+                <tr>
+                    <td></td>
+                    <td>星期${weeks.join('</td><td>星期')}</td>
+                </tr>
+            `)
+
+            // row 2~4
+            for (const i in data) {
+                document.write(`
+                    <tr>
+                        <td>時段${times[i]}</td>
+                `)
+                for (const j in data[i]) {
+                    document.write(`<td>${data[i][j]}</td>`)
+                }
+                document.write('</tr>')
+            }
+        </script>
+    </table> -->
+
+    <!-- 每日平均溫度 -->
+    <!-- <script>
+        const dailySums = [0, 0, 0, 0]
+        for (const i in data) {
+            for (const j in data[i]) {
+                dailySums[j] = +(dailySums[j] + data[i][j]).toFixed(1)  // toFixed 會變字串，要轉回來
+            }
+        }
+        const dailyAvgs = dailySums.map(x => (x / data.length).toFixed(2))
+        console.log(dailyAvgs)
+    </script> -->
+
+    <!-- 時段平均溫度 -->
+    <!-- <script>
+        const timeAvgs = []
+        for (const i in data) {
+            let timeSum = 0
+            for (const j in data[i]) {
+                console.log(i, j, data[i][j])
+                timeSum += data[i][j]
+            }
+            timeAvgs[i] = timeSum / data[i].length
+        }
+        console.log(timeAvgs)
+    </script> -->
+
+    <!-- 平均 + 表格  -->
+    <!-- <table border="1">
+        <script>
+            // 
+            const dailySums = [0, 0, 0, 0]
+
+
+            // row 1
+            document.write(`
+                <tr>
+                    <td></td>
+                    <td>星期${weeks.join('</td><td>星期')}</td>
+                    <td>時段平均</td>
+                </tr>
+            `)
+
+            // row 2~4
+            for (const i in data) {
+                document.write(`
+                    <tr>
+                        <td>時段${times[i]}</td>
+                `)
+                for (const j in data[i]) {
+                    document.write(`<td>${data[i][j]}</td>`)
+                    // 每日加總
+                    dailySums[j] = +(dailySums[j] + data[i][j]).toFixed(1)  // toFixed 會變字串，要轉回來
+                }
+                document.write('</tr>')
+            }
+            // 每日平均
+            const dailyAvgs = dailySums.map(x => (x / data.length).toFixed(2))
+
+            // row 5
+            document.write(`
+                <tr>
+                    <td>每日平均</td>
+                    <td>${dailyAvgs.join('</td><td>')}</td>
+                </tr>
+            `)
+        </script>
+    </table> -->
+    <!-- 平均 + 表格  -->
+    <table border="1">
+        <script>
+            // 
+            const dailySums = [0, 0, 0, 0]
+            const timeAvgs = []
+
+            // row 1
+            document.write(`
+                <tr>
+                    <td></td>
+                    <td>星期${weeks.join('</td><td>星期')}</td>
+                    <td>時段平均</td>
+                </tr>
+            `)
+
+            // row 2~4
+            for (const i in data) {
+
+                let timeSum = 0  // 暫存溫度加總
+                document.write(`
+                    <tr>
+                        <td>時段${times[i]}</td>
+                `)
+                for (const j in data[i]) {
+                    document.write(`<td>${data[i][j]}</td>`)
+                    // 每日加總
+                    dailySums[j] = +(dailySums[j] + data[i][j]).toFixed(1)  // toFixed 會變字串，要轉回來
+
+                    // 每時段加總
+                    timeSum += data[i][j]
+                }
+                // 每時段平均
+                timeAvgs[i] = timeSum / data[i].length
+                document.write(`<td>${timeAvgs[i]}</td>`)
+
+                document.write('</tr>')
+
+            }
+            // 每日平均
+            const dailyAvgs = dailySums.map(x => +(x / data.length).toFixed(2))
+
+            // row 5
+            document.write(`
+                <tr>
+                    <td>每日平均</td>
+                    <td>${dailyAvgs.join('</td><td>')}</td>
+                </tr>
+            `)
+
+            console.log(dailyAvgs, timeAvgs)
+        </script>
+    </table>
+    <script>
+        // 最高低溫日子 and 時段
+        const maxDayIndex = dailyAvgs.indexOf(Math.max(...dailyAvgs))
+        const maxTimeIndex = timeAvgs.indexOf(Math.max(...timeAvgs))
+        const minDayIndex = dailyAvgs.indexOf(Math.min(...dailyAvgs))
+        const minTimeIndex = timeAvgs.indexOf(Math.min(...timeAvgs))
+
+        document.write(`<h2>最高溫日: 星期${weeks[maxDayIndex]}</h2>`)
+        document.write(`<h2>最高溫時段: 時段${times[maxTimeIndex]}</h2>`)
+        document.write(`<h2>最低溫日: 星期${weeks[minDayIndex]}</h2>`)
+        document.write(`<h2>最低溫時段: 時段${times[minTimeIndex]}</h2>`)
+    </script>
+</body>
+
+</html>
