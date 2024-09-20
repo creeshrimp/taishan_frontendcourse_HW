@@ -18,7 +18,10 @@
         const gua = ([xia_n, shan_n, yao_n]) => {
             const guaStr = '乾兌離震巽坎艮坤'
             const guaArr = [
-                guaStr[(xia_n - 1) % 8], guaStr[(shan_n - 1) % 8], yao_n % 6
+                // -1 因為 乾~坤 對應 餘數1~8，但餘數是0~7，string 的 index 也是0~7
+                guaStr[(xia_n - 1) % 8],
+                guaStr[(shan_n - 1) % 8],
+                (yao_n % 6) || 6    // 變爻餘0(整除)須輸出6
             ]
             return guaArr
         }
