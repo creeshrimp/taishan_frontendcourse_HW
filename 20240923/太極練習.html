@@ -15,7 +15,10 @@
         }
 
         :root {
-            --width-taichi: 50vw;
+            /* 選80vh或50vw中較小的當作值 */
+            --width-taichi: min(80vh, 50vw);
+            
+            /* --width-taichi: 50vw; */
             /* --height-taichi: 50vw; */
         }
 
