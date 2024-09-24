@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動畫</title>
+    <style>
+        .container {
+            width: 75%;
+            margin: auto;
+            padding: 1rem;
+            border: 1px solid #333;
+        }
+
+        .wrap {
+            border: 5px dashed #333;
+            margin: 50px;
+            padding: 50px 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+            color: white;
+            line-height: 100px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        /* 建立動畫 */
+        /* 步驟一 ， 建立一組關鍵影格*/
+        @keyframes myAnime {
+            from {
+                transform: translate(0, 0);
+                background-color: red;
+            }
+
+            to {
+                transform: translate(50vw, 0);
+                background-color: blue;
+            }
+        }
+
+        @keyframes kaifu {
+            0% {
+                left: 0;
+                transform: rotate(0deg);
+                background-color: red;
+            }
+
+            30% {
+                right: 0;
+                transform: rotate(360deg);
+                background-color: green;
+            }
+
+            90% {
+                left: 0;
+                transform: rotate(360deg);
+                background-color: green;
+            }
+
+            100% {
+                rleft: 50%;
+                transform: translate(-50%, 0) rotate(360deg);
+                background-color: blue;
+            }
+        }
+
+        /* 步驟二 建立一個專用的class */
+        .anime {
+            /* 設定動畫名稱 */
+            animation-name: myAnime;
+
+            /* 設定動畫持續時間 */
+            animation-duration: 2s;
+
+            /* 設定播放次數 */
+            animation-iteration-count: 1;
+
+            /* 設定播放速率 */
+            animation-timing-function: linear;
+
+            /* 播放的方向 
+                normal
+                reverse 反向
+                alternate 交替
+                alternate-reverse 交替，但先反向
+            */
+            animation-direction: normal;
+
+            /* 播放的延遲時間 */
+            animation-delay: 1s;
+
+            /* 填充模式 */
+            /* 
+                both: 0% (紅色) => 100% (藍色) 
+                forward: css初始狀態(黑色) => 0% (紅色) => 100% (藍色)
+                backward: 0% (紅色) => 100% (藍色) => css初始狀態(黑色)
+            */
+            animation-fill-mode: backwards;
+            /* 縮寫 */
+            animation: myAnime 2s linear 1s 1 backwards;
+        }
+
+        .kaifu {
+            animation-name: kaifu;
+            animation-duration: 2s;
+            animation-iteration-count: 1;
+
+            animation-timing-function: linear;
+            animation-direction: normal;
+
+            /* 播放的延遲時間 */
+            animation-delay: 1s;
+            animation-fill-mode: backwards;
+
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>動畫(animation)</h1>
+        <p>動畫與轉場的差異</p>
+        <h2>animation</h2>
+        <ul>
+            <li>可以設定關鍵影格(keyframe)控制動畫進度的狀態，產生更複雜的動畫</li>
+            <li>網頁仔入時自動發生</li>
+        </ul>
+        <br>
+
+        <h2>myAnime</h2>
+        <div class="wrap">
+            <div class="box anime"></div>
+        </div>
+
+        <br>
+        <h2>kaifu</h2>
+        <div class="wrap">
+            <div class="box kaifu"></div>
+        </div>
+    </div>
+</body>
+
+</html>

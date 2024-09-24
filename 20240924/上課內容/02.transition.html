@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: '微軟正黑體';
+        }
+
+        /* 繼承視窗的高度 */
+        html,
+        body {
+            height: 100%;
+        }
+
+        .hover {
+            /* 初始狀態 */
+            width: 100px;
+            height: 100px;
+            background: white;
+            line-height: 100px;
+            font-size: 2rem;
+            background: black;
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+
+            /* 單一屬性 */
+            /* 追蹤轉場屬性 */
+            transition-property: width, color, background;
+
+            /* 直接追蹤所有的轉場屬性，比較快，除非你有特別不追蹤的屬性 */
+            transition-property: all;
+
+            /* 轉場持續時間 */
+            transition-duration: 2s;
+
+            /* 轉場速率
+                ease
+                linear
+                ease-in
+                ease-out
+                ease-in-out
+
+                cubic-bezier(n,n,n,n) 允許自訂速率
+                更多轉場速率: https://easings.net/
+            */
+            transition-timing-function: ease;
+            transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+
+            /* 延遲 */
+            transition-delay: 1s;
+
+            transition:
+                width 0.5s cubic-bezier(0.83, 0, 0.17, 1),
+                background 1s ease-in-out,
+                color 5s linear;
+        }
+
+        .hover:hover {
+            width: 50vw;
+            color: red;
+            background: yellow;
+        }
+
+        .hover span {
+            position: absolute;
+            transition: 1s;
+        }
+
+        .hover:hover span {
+            left: 50%;
+            top: 50%;
+            transform: rotate(3600deg) translate(-50%, -50%);
+        }
+
+        .sidebar {
+            width: 100px;
+            color: white;
+            background: #aaa;
+            padding: 1rem;
+            margin-left: -200px;
+        }
+
+        label {
+            color: yellow;
+            padding: 0.5rem;
+            border: 2px solid black;
+            display: inline-block;
+            background: darkblue;
+            cursor: pointer;
+            border-radius: 0.5rem;
+        }
+
+        #checked-me {
+            display: none;
+        }
+
+        #checked-me:checked+.sidebar {
+            margin-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 位移 -->
+    <section>
+        <h1>轉場(transition)或稱過渡</h1>
+        <ul>
+            <li>轉場是兩組</li>
+        </ul>
+        <h1>hover狀態</h1>
+
+        <div class="hover">
+            <span>hover</span>
+        </div>
+    </section>
+
+    <hr>
+    <section>
+
+        <label for="checked-me">我是一顆按鈕</label>
+        <input type="checkbox" id="checked-me">
+        <div class="sidebar">
+            形象躺在，病人先後依法第三則是團隊點擊，大陸生活並在保存怎麼，同樣能學到一絲未來，召開你怎麼，是在腦袋體系興趣尋求登錄今日你好我就當我當天你看，空間城市和我不願意也會利益動畫費用總統要求反覆二級，口氣欄目電信變得採用這次奇蹟超過而是電源就算，魔獸新技術激。
+        </div>
+    </section>
+
+    <hr>
+    <section>
+        <h1 tabindex="1">focus狀態</h1>
+        <p tabindex="2">focus狀態改變，transition產生</p>
+        <nav tabindex="3">focus me</nav>
+    </section>
+</body>
+
+</html>
