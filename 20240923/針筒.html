@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>syringe</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 選80vh或50vw中較小的當作值 */
+            --width-syringe: min(50vh, 50vw);
+        }
+
+        #syringe {
+            /* 水平垂直置中 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+
+            width: var(--width-syringe);
+            height: calc(var(--width-syringe)/4);
+            background: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="syringe"></div>
+</body>
+
+</html>
