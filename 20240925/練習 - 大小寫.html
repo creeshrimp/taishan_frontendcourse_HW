@@ -82,8 +82,7 @@
         }
 
         #result {
-            font-size: 1.3rem;
-            margin-top: 1rem;
+            margin-top: 0;
         }
 
         /* utlts */
@@ -113,31 +112,53 @@
         input {
             color: white;
         }
+
+        .convertMark{
+            font-size: 2rem;
+            text-align: center;
+            margin: 0.5rem 0;
+            color: #ffffff99;
+        }
     </style>
 </head>
 
 <body>
     <div class="calculator">
-        <input type="text" placeholder="請輸入文字" id="input">
-        <input type="button" value="大小寫轉換" onclick="BtnClick()"><br>
+        <input type="text" placeholder="輸入文字轉換大小寫" id="input" oninput="main()">
+        <div class="convertMark">⇅</div>
         <input id="result"></input>
     </div>
 
     <script>
-        function BtnClick() {
+        function main() {
             // 取得輸入值
             let input_str = document.querySelector('#input').value
+            // 空字串就不跑
             if (!input_str) return
 
-            document.querySelector('#result').value = reverseStr(input_str).trim()
+            document.querySelector('#result').value = convertCase(input_str)
         }
 
         /**
          * 大小寫轉換
+         * 
          * return {string}
         */
         const convertCase = (text) => {
-            return text.split('').reverse().join('')
+            let result = ''
+            for (const char of text) {
+                // 等於自己轉大寫(那就是大寫，或其他東西) 轉小寫
+                if (char === char.toUpperCase()) {
+                    // 特殊符號或中文反正不管轉大小寫都長一樣，會浪費時間多轉兩次但反正結果是對的🤔
+                    result += char.toLowerCase()
+                }
+                // 不等於自己轉大寫(那就是小寫) 轉大寫
+                else {
+                    result += char.toUpperCase()
+                }
+            }
+            console.log(result)
+            return result
         }
     </script>
 </body>
