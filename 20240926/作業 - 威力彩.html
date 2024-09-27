@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             margin: auto;
-            padding: 1.5rem 2.6rem 2rem;
+            padding: 1.5rem 2rem 2rem;
             background-color: #36353d;
             color: #b3b3b3;
 
@@ -68,8 +68,8 @@
         }
 
         .calculator input[type="button"] {
-            margin-top: 1.6rem;
-            padding: 1rem;
+            margin-top: 1rem;
+            padding: 1.2rem;
             font-size: 1.2rem;
             background: #6664cb;
             border: none;
@@ -106,7 +106,7 @@
         }
 
         /* >320 */
-        @media (min-width: 420px) {
+        @media (min-width: 500px) {
             .calculator {
                 width: 80%;
                 height: auto;
@@ -120,39 +120,38 @@
             }
         }
 
-        input {
-            color: white;
-        }
-
         section {
             display: flex;
             width: 100%;
+            min-height: 4.3rem;
+            margin-top: 0.6rem;
         }
 
         section>input {
             box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.5);
         }
 
-        #area_A {
-            flex: 2 2 60%;
-        }
-
-        #area_B {
-            flex: 1 1 30%;
-        }
-
         section>span {
+            padding: 0.5rem 0.8rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #51515d;
+            border-radius: 4px 0 0 4px;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0.5rem 0.8rem;
-            font-weight: bold;
-            /* box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.5); */
-            background-color: #51515d;
+            flex: 0 0 4rem;
         }
 
-        section>input:first-of-type {
-            margin-right: 0.5rem;
+        .displayNumber {
+            padding: 1rem 1.6rem;
+            background: #232325;
+            color: #c7c7c7;
+            font-size: 1.5rem;
+            line-height: 2.3rem;
+            border-radius: 0 4px 4px 0;
+            flex: 1
         }
     </style>
 </head>
@@ -160,8 +159,13 @@
 <body>
     <div class="calculator">
         <section class="word-nowrap">
-            <span>A</span><input type="text" id="area_A" readonly>
-            <span>B</span><input type="text" id="area_B" readonly>
+            <span>A區</span><div class="displayNumber" id="area_A"></div>
+            <!-- <span>A</span><input type="text" id="area_A" readonly> -->
+            <!-- <span>B</span><div class="displayNumber" id="area_B"></div> -->
+        </section>
+        <section class="word-nowrap">
+            <span>B區</span><div class="displayNumber" id="area_B"></div>
+            <!-- <span>B</span><input type="text" id="area_B" readonly> -->
         </section>
         <input type="button" onclick="main()" value="威力彩">
     </div>
@@ -178,8 +182,8 @@
             const poolB_str = lottery(8, 1).join(', ')
 
             // 顯示在畫面上
-            area_A.value = poolA_str
-            area_B.value = poolB_str
+            area_A.innerHTML = poolA_str
+            area_B.innerHTML = poolB_str
 
             log(`A: ${poolA_str}\nB: ${poolB_str}`)
         }
