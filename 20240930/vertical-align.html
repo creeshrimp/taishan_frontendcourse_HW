@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vertical-align</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* vertical-align 不但會垂直置中，還會消除下方的小空白 */
+        .section0 img {
+            vertical-align: middle;
+        }
+
+        .section1 {
+            margin-top: 1rem;
+        }
+
+        /* 使用 float 的話 vertical-align: middle 會失效，因為float會將元素轉成block*/
+        .section2 {
+            margin-top: 1rem;
+            overflow: hidden;
+
+            img {
+                vertical-align: middle;
+                float: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        vertical-align 對 block 沒有作用
+        只能對 display: inline 或 display: inline-block 作用
+        span、a、img、iframe 都是 inline 元素
+    -->
+    <div class="section0" style="background: deeppink;">
+        <img src="https://picsum.photos/100/100/?random=10">
+        <img src="https://picsum.photos/300/300/?random=10">
+    </div>
+
+    <div class="section1" style="background: deeppink;">
+        <img src="https://picsum.photos/100/100/?random=10">
+        <img src="https://picsum.photos/300/300/?random=10">
+    </div>
+
+    <div class="section2" style="background: deeppink;">
+        <img src="https://picsum.photos/100/100/?random=10">
+        <img src="https://picsum.photos/300/300/?random=10">
+    </div>
+</body>
+
+</html>

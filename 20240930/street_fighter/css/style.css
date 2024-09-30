@@ -1,0 +1,306 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* bootstrap 偷來的滑順效果 */
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth;
+    }
+}
+
+/* 建立一個寬度一致且水平置中的容器 */
+
+.container {
+    width: 75%;
+    margin: auto;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.clear-both {
+    clear: both;
+}
+
+/* 導覽列 ----------------------------------------- */
+#header {
+    width: 75%;
+    height: 60px;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    ;
+}
+
+#header .menu {
+    width: 100%;
+    height: 60px;
+    background: url(../images/nav-bg-full.jpg) repeat-x center;
+
+    /* 處理幽靈空白 */
+    font-size: 0;
+    text-align: center;
+}
+
+#header .menu a:hover {
+    background: rgb(255, 60, 0, 0.3)
+}
+
+#header .menu li {
+    /* 處理幽靈空白 */
+    font-size: 1rem;
+
+    display: inline-block;
+    padding: 1rem 0;
+    /* background: red; */
+}
+
+#header .menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1.5rem;
+    transition: 0.5s;
+}
+
+/* 空一個位置給LOGO */
+#header .menu li:nth-child(3) {
+    margin-right: 15%;
+}
+
+#header .menu::before {
+    content: '';
+    width: 12px;
+    height: 60px;
+    background: url('../images/nav-bg-left.png');
+
+    position: absolute;
+    left: -10px;
+}
+
+#header .menu::after {
+    content: '';
+    width: 12px;
+    height: 60px;
+    background: url('../images/nav-bg-right.png');
+
+    position: absolute;
+    right: -10px;
+}
+
+/* logo */
+#header .logo {
+    width: 15%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#header .logo img {
+    width: 100%;
+}
+
+/* 首頁 ------------------------------------------- */
+#section01 {
+    background: url(../images/section01-bg.jpg) no-repeat center/cover;
+}
+
+#section01 .main-news {
+    /* background: rgb(236, 250, 214); */
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+        font-size: 2.5rem;
+        font-style: italic;
+        color: yellow;
+        text-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px black, 0 0 20px black;
+    }
+}
+
+/* 遊戲介紹 ----------------------------------------- */
+#section02 {
+    background: url(../images/section02-bg.jpg) no-repeat center/cover;
+
+    .container {
+        height: 100%;
+        position: relative;
+
+        .row {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0;
+            width: 100%;
+
+
+            .col {
+                color: white;
+                width: 50%;
+                padding: 5rem 1rem;
+                display: inline-block;
+                font-size: 1rem;
+
+                vertical-align: middle;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                line-height: 1.5;
+                text-indent: 2rem;
+                letter-spacing: 1px;
+                margin-bottom: 1rem;
+            }
+
+            iframe {
+                width: 100%;
+                height: 300px;
+                border: 5px solid rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+    }
+}
+
+/* 角色列表 -----------------------------------------*/
+
+/* section03 斜斜的背景 */
+#section03 {
+    background: linear-gradient(45deg, #222 40%, #aaa 40%);
+
+    /* 角色資料 */
+    .role_info {
+        height: 65%;
+
+        >div {
+            display: none;
+            height: 100%;
+        }
+
+        input {
+            display: none;
+
+            &:checked+div {
+                display: block;
+            }
+        }
+
+        .role,
+        .info {
+            width: 50%;
+            height: 100%;
+        }
+
+        .role {
+            /* background: pink; */
+            padding: 5rem 1.5rem 0;
+            float: left;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .info {
+            padding: 8rem 1rem 5rem;
+            float: right;
+        }
+    }
+
+    /* 角色清單 */
+
+    .role_list {
+        height: 35%;
+
+        font-size: 0;
+        text-align: center;
+
+        label {
+            width: 7%;
+            display: inline-block;
+            margin: 0 0 5px 0;
+            cursor: pointer;
+            transition: 0.3s;
+
+            :hover {
+                filter:
+                    drop-shadow(0 0 5px rgb(255, 0, 0)) drop-shadow(0 0 10px rgb(255, 0, 0));
+            }
+
+            &:nth-child(3)~label {
+                filter: brightness(0.5) opacity(0.5);
+                /* filter: opacity(0); */
+                /* opacity: 0; */
+                cursor: auto;
+            }
+        }
+
+
+        img {
+            width: 100%;
+        }
+
+    }
+}
+
+/* footer ------------------------------------------- */
+#footer {
+    background: black;
+    color: white;
+    padding: 2rem 0;
+
+    .row {
+        overflow: hidden;
+
+        .col {
+            width: 25%;
+            float: left;
+            /* display: inline-block; */
+        }
+    }
+
+    .card {
+        padding: 1rem;
+
+        h3 {
+            margin: 1rem 0;
+        }
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    li {
+        line-height: 1.4;
+        padding-left: 1.5rem;
+    }
+
+
+}
