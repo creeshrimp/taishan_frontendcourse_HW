@@ -1,0 +1,22 @@
+/* reset */
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* variables */
+:root {
+    --primary-bg-color: #0f0f0f;
+}
+
+/*  */
+#container {
+    height: 100%;
+    background: var(--primary-bg-color);
+}
