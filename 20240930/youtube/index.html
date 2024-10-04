@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
     <div id="container">
-        <header id="masthead"></header>
+        <!-- masthead 上方固定導覽列 -->
+        <header id="masthead">
+            <div id="start"></div>
+            <div id="center"></div>
+            <div id="end"></div>
+        </header>
+
+        <!-- content 下方區塊 -->
         <main id="content">
+
+            <!-- guide 左側導覽列 -->
             <aside id="guide"></aside>
+
+            <!-- contents 上的區塊，chips -->
             <header id="header"></header>
-            <div id="contents"></div>
+
+            <!-- contents 影片grid item -->
+            <div id="contents">
+                <div class="vedio-item"></div>
+
+            </div>
         </main>
     </div>
 </body>
+
 </html>
