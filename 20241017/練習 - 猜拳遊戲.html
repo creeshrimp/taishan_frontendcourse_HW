@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜拳</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+        }
+
+        body {
+            /* background: #2e2e2e; */
+        }
+
+        #container {
+            width: 60%;
+            margin: 0 auto;
+            min-width: 800px;
+
+            /* background: #c7c7c7; */
+        }
+
+        #jankenBtns {
+            margin-top: 3rem;
+
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 10rem;
+                height: 10rem;
+                font-size: 3rem;
+                margin-right: 1rem;
+
+                cursor: pointer;
+            }
+
+            button:last-child {
+                margin-right: 0;
+            }
+        }
+
+        /* 統計 */
+        #statistics {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+
+            span {
+                margin-right: 1rem;
+            }
+
+            span:last-child {
+                margin-right: 0;
+            }
+        }
+
+        /* 結果紀錄 */
+        #results {
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+
+            ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                    list-style: none;
+                }
+
+                li:first-child {
+                    outline: 1px solid black;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main id="container">
+        <div id="jankenBtns">
+            <button>✊</button>
+            <button>🖐</button>
+            <button>✌</button>
+        </div>
+        <div id="statistics">
+            輸:<span id="winCount">0</span>
+            贏:<span id="loseCount">0</span>
+            平手:<span id="drawCount">0</span>
+        </div>
+        <div id="results">
+            <ul>
+                <li>你出✌。電腦出✊。 你輸了</li>
+            </ul>
+        </div>
+    </main>
+
+
+    <script>
+        const jankenBtns = document.getElementById('jankenBtns')
+        const results_ul = document.querySelector('#result>ul')
+        jankenBtns.addEventListener('click', (e) => {
+            // 如果點到的是BUTTON (大寫是因為 .tagName 取出來都是大寫)
+
+            const yourAns = e.target.innerText
+            const cpuAns = janken(e.target.innerText)[0]
+            const resultText = janken(e.target.innerText)[1]
+            if ((e.target.tagName === 'BUTTON')) {
+                results_ul.insertAdjacentHTML('afterbegin', `<li>你出${yourAns}。電腦出${cpuAns}。 你${resultText}了</li>`)
+
+            }
+        })
+        /**
+         * 得到電腦出的拳並判斷輸贏
+        */
+        function janken(yourAnswer) {
+            const jankenArr = ['✊', '🖐', '✌']
+            const cpuAnswer = jankenArr[randomInt(3)]
+
+            // 判斷輸贏
+            const resultNum = jankenArr.indexOf(yourAnswer) - jankenArr.indexOf(cpuAnswer)
+            console.log(resultNum)
+            let resultText = ''
+            // 平手
+            if (resultNum === 0) resultText = 'DRAW'
+            // 玩家贏
+            else if (resultNum === 1 || resultNum === -2) resultText = 'WIN'
+            // 剩下都是輸
+            else resultText = 'LOSE'
+
+            // 回傳 [電腦答案, 輸贏結果]
+            return [cpuAnswer, resultText]
+        }
+
+        function randomInt(max) {
+            return Math.floor(Math.random() * max)
+        }
+    </script>
+</body>
+
+</html>
