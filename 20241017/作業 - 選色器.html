@@ -5,22 +5,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        #colorDisplay {
+            width: 150px;
+            height: 150px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        #rgbRanges {}
+    </style>
 </head>
 
 <body>
     <div id="colorDisplay"></div>
-    <input type="range" name="r" id="input_r" value="0">
-    <input type="range" name="r" id="input_g" value="0">
-    <input type="range" name="r" id="input_b" value="0">
+    <div id="rgbRanges">
+        <div class="rangeGroup">
+            <input type="range" name="r" id="input_r" value="0">
+            <span>0</span>
+            <button class="random">隨機</button>
+        </div>
+        <div class="rangeGroup">
+            <input type="range" name="r" id="input_g" value="0">
+            <span>0</span>
+            <button class="random">隨機</button>
+        </div>
+        <div class="rangeGroup">
+            <input type="range" name="r" id="input_b" value="0">
+            <span>0</span>
+            <button class="random">隨機</button>
+        </div>
+    </div>
 
     <script>
 
         const colorDisplay = document.querySelector('#colorDisplay');
-        const inputs = document.querySelectorAll('input');
+        const rangeGroups = document.querySelectorAll('#rgbRanges .rangeGroup');
 
-        for (const input in inputs) {
+        console.log(input_r.value)
+        for (const i in rangeGroups) {
+            if (Object.hasOwn(rangeGroups, i)) {
+                // console.log(i, rangeGroups[i], rangeGroups)
+                console.log(i, rangeGroups[i].querySelector('span').innerText)
 
+                rangeGroups[i].oninput = function () {
+                    const [r, g, b] = [input_r.value * 2.55, input_g.value * 2.55, input_b.value * 2.55];
+                    colorDisplay.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    rangeGroups[i].querySelector('span').innerText = Math.round(rangeGroups[i].querySelector('input').value * 2.55)
+                }
+            }
         }
+
+        // for (const input of inputs) {
+        //     console.log(input)
+
+        //     input.oninput = function () {
+        //         colorDisplay.style.backgroundColor = `rgb(${input_r.value * 2.55}, ${input_g.value * 2.55}, ${input_b.value * 2.55})`;
+        //     }
+        // }
     </script>
 </body>
 
