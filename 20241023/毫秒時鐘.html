@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        #clock {
+            width: 300px;
+            height: 300px;
+            background: gray;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #hour,
+        #minute,
+        #second {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -100%;
+            transform-origin: bottom center;
+        }
+
+        #hour {
+            width: 4%;
+            height: 20%;
+            background: skyblue;
+            border-radius: 5px;
+        }
+
+        #minute {
+            width: 2%;
+            height: 30%;
+            background: pink;
+            border-radius: 5px;
+        }
+
+        #second {
+            width: 1%;
+            height: 40%;
+            background: greenyellow;
+            border-radius: 5px;
+        }
+
+        /* 中心點 定位用 */
+        #clock::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: red;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <p id="text">00:00:00</p>
+
+    <script>
+        const elHour = document.getElementById('hour')
+        const elMinute = document.getElementById('minute')
+        const elSecond = document.getElementById('second')
+        const elText = document.getElementById('text')
+        const now = new Date()
+
+        const clock = () => {
+            const date = new Date()
+            const h = date.getHours()
+            const m = date.getMinutes()
+            const s = date.getSeconds()
+            const ms = date.getMilliseconds()
+            elHour.style.rotate = `${h * 30}deg`
+            elMinute.style.rotate = `${m * 6}deg`
+            elSecond.style.rotate = `${(s * 1000 + ms) * 0.006}deg`
+
+            // console.log(h, m, s, ms)
+            console.log(s)
+        }
+
+        // clock()
+        // setInterval(clock, 1)
+    </script>
+</body>
+
+</html>
