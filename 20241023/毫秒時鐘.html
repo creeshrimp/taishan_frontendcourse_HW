@@ -88,15 +88,15 @@
             const s = date.getSeconds()
             const ms = date.getMilliseconds()
             elHour.style.rotate = `${h * 30}deg`
-            elMinute.style.rotate = `${m * 6}deg`
-            elSecond.style.rotate = `${(s * 1000 + ms) * 0.006}deg`
+            elMinute.style.rotate = `${(m + (1000 * s + ms) / 60000) * 6}deg`
+            elSecond.style.rotate = `${(1000 * s + ms) * 0.006}deg`
 
             // console.log(h, m, s, ms)
             console.log(s)
         }
 
-        // clock()
-        // setInterval(clock, 1)
+        clock()
+        setInterval(clock, 1)
     </script>
 </body>
 
