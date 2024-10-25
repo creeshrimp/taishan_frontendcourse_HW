@@ -11,10 +11,15 @@
             box-sizing: border-box;
         }
 
+        #clock-wrapper {
+            width: 50%;
+            min-width: 300px;
+        }
 
         #clock {
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            aspect-ratio: 1;
+
             background: gray;
             border-radius: 50%;
             position: relative;
@@ -63,16 +68,22 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
+
+        #text {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <div id="clock">
-        <div id="hour"></div>
-        <div id="minute"></div>
-        <div id="second"></div>
+    <div id="clock-wrapper">
+        <div id="clock">
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
+        </div>
+        <p id="text">00:00:00</p>
     </div>
-    <p id="text">00:00:00</p>
 
     <script>
         const elHour = document.getElementById('hour')
@@ -91,8 +102,7 @@
             elMinute.style.rotate = `${(m + (s + ms / 1000) / 60) * 6}deg`
             elSecond.style.rotate = `${(s + ms / 1000) * 6}deg`
 
-            // console.log(h, m, s, ms)
-            console.log(s)
+            elText.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${Math.floor(ms / 10).toString().padStart(2, '0')}`
         }
 
         clock()
