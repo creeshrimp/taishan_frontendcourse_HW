@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #swiper {
+            width: 70%;
+            height: fit-content;
+            min-width: 300px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                width: 10%;
+                height: 10%;
+                border: 2px solid blue;
+                background: transparent;
+                color: blue;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            #btnLeft {
+                margin-right: 1rem;
+            }
+
+            #btnRight {
+                margin-left: 1rem;
+            }
+        }
+
+        #frame {
+            width: 100%;
+            outline: 4px solid blue;
+
+            overflow: hidden;
+        }
+
+        #imgs {
+            /* border: 4px solid red; */
+            display: flex;
+            width: 500%;
+
+            position: relative;
+            left: -100%;
+
+            img {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="swiper">
+        <button id="btnLeft">&lt;</button>
+        <div id="frame">
+            <div id="imgs">
+                <img src="images/0555.jpg">
+                <img src="images/0551.jpg">
+                <img src="images/0552.jpg">
+                <img src="images/0553.jpg">
+                <img src="images/0554.jpg">
+            </div>
+        </div>
+        <button id="btnRight">&gt;</button>
+    </div>
+
+    <script>
+
+        // 往右
+        $('#btnRight').click(function () {
+            $('#imgs').animate({
+                left: '-=100%',
+            }, function () {
+                const firstImg = $('#imgs img').first()
+                firstImg.appendTo('#imgs')
+                $('#imgs').css({
+                    left: '-100%'
+                })
+
+            })
+        })
+
+        // 往左
+        $('#btnLeft').click(function () {
+            $('#imgs').animate({
+                left: '+=100%',
+            }, function () {
+                const lastImg = $('#imgs img').last()
+                lastImg.prependTo('#imgs')
+                $('#imgs').css({
+                    left: '-100%'
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
