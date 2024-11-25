@@ -15,7 +15,8 @@ html {
     /* colors */
     --primary-bg-color: #0f0f0f;
     --primary-text-color: #f1f1f1;
-    --primary-text-color-light: rgb(255 255 255 / 20%);
+    /* --primary-text-color-light: rgb(255 255 255 / 20%); */
+    --primary-text-color-light: #aaa;
     --primary-text-accent-color: #3ea6ff;
 
     --btn-color: #222222;
@@ -219,7 +220,7 @@ html {
 
 /* 導覽列右邊的主要內容區塊 */
 #main {
-    background-color: #3d3d3d;
+    /* background-color: #3d3d3d; */
     width: calc(100% - var(--side-guide-width));
     height: 3000px;
 
@@ -237,7 +238,7 @@ html {
 
         .vedio-item {
             width: 100%;
-            background-color: #3d3d3d;
+            /* background-color: #3d3d3d; */
             margin-bottom: 24px;
 
             .thumbnail {
@@ -254,6 +255,9 @@ html {
                 height: 40px;
                 padding: 2px;
 
+                float: left;
+                margin: 12px 12px 0 0;
+
                 img {
                     width: calc(100% - 4px);
                     border-radius: 50%;
@@ -261,8 +265,18 @@ html {
             }
 
             .meta {
-                display: inline-block;
+                float: left;
+                margin-top: 12px;
 
+                h3 {
+                    margin: 0 0 12px 0;
+                    color: var(--primary-text-color);
+                }
+
+                p {
+                    font-size: 14px;
+                    color: var(--primary-text-color-light);
+                }
             }
         }
     }
