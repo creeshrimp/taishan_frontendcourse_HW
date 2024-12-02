@@ -92,7 +92,7 @@
         </div>
         <hr>
         <!-- 目前顯示 -->
-        目前顯示: 全部，共 <span>5</span> 個
+        目前顯示: <span>{{ filter }}</span>，共 <span>{{ filteredTodos.length }}</span> 個
         <!-- 清單列表 -->
         <ul class="todoList">
             <li v-for="todo in filteredTodos" :class="todo.isDone ? 'done' : ''">
