@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.13/vue.global.min.js'
+        integrity='sha512-rgrFBaGRHjj2cy6RtcWr21S4oSicNV/Y3qACuRZZIVdi6hGIXOKZeFTtzFFZCJ7cI4OrwbY7/FGVvaJ5hXJdJg=='
+        crossorigin='anonymous'></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .todoInput {
+            outline: none;
+        }
+
+        .todoList {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .error {
+            border: 5px solid red;
+        }
+
+        .success {
+            border: 5px solid green;
+        }
+
+        .done {
+            text-decoration: line-through;
+        }
+
+        /* util */
+        .ml-1 {
+            margin-left: 1rem;
+        }
+
+        /*  */
+        .todoList {
+            li {
+                margin-top: 0.5rem;
+
+                button {
+                    margin-left: 1rem;
+                }
+
+            }
+        }
+
+        button,
+        input[type="submit"],
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        #function_buttons {
+            button {
+                margin-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 輸入清單 -->
+        <form @submit.prevent="add">
+            <input type="text" v-model="input" :class="inputCheck" class="todoInput">
+            <input type="submit" value="新增" class="ml-1"></input>
+        </form>
+        <hr>
+        <!-- 搜尋 filter -->
+        <input type="text" v-model="search">
+        <hr>
+        <!-- 功能按鈕 -->
+        <div id="function_buttons">
+            <button>全部標記為已完成</button>
+            <button>全部標記為未完成</button>
+            <br>
+            <button>顯示全部</button>
+            <button>顯示已完成</button>
+            <button>顯示未完成</button>
+            <br>
+            <button>清除全部</button>
+            <button>清除已完成</button>
+            <button>清除未完成</button>
+        </div>
+        <hr>
+        <!-- 目前顯示 -->
+        目前顯示: 全部，共 <span>5</span> 個
+        <!-- 清單列表 -->
+        <ul class="todoList">
+            <li v-for="todo in filteredTodos" :class="todo.isDone ? 'done' : ''">
+                <input type="checkbox" v-model="todo.isDone">
+                <span>{{ todo.text }}</span>
+                <button @click="remove(todo.id)">移除</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const { ref, reactive, computed, watch, onMounted } = Vue
+        Vue.createApp({
+            setup() {
+                // ref 所有資型都能使用，但是物件和陣列只能淺層偵測變動，使用時需要加上 .value
+                const input = ref('')
+                const search = ref('')
+
+                // reactive 只有物件和陣列可用，不用加.value，可以深層監聽
+                const todos = reactive([])
+
+                // HTML 模板沒有用到，不需要宣告成響應性資料
+                let id = 1
+
+                // input 驗證
+                const inputCheck = computed(() => {
+                    if (input.value.length === 0) {
+                        return ''
+                    } else if (input.value.length <= 2) return 'error'
+                    else return 'success'
+
+                })
+
+                // 搜尋過濾
+                const filteredTodos = computed({
+                    get() {
+                        return todos.filter(todo => todo.text.includes(search.value))
+                    },
+                    set(newVal) {
+
+                    }
+
+                })
+
+                // localStorage
+                // 偵測變動並寫入
+                watch(todos, () => {
+                    localStorage.todoList_todos = JSON.stringify(todos)
+                })
+
+                // 在 onMounted 時讀取
+                onMounted(() => {
+                    // 從 localStorage 讀取todos，預設值為空陣列
+                    const todos_localStorage = JSON.parse(localStorage.todoList_todos || '[]')
+                    console.log('todos: ', todos_localStorage)
+                    todos.splice(0, 0, ...todos_localStorage)
+                    // 把id更新為最後一筆+1
+                    if (todos.length > 0) id = todos[todos.length - 1].id + 1
+                })
+
+
+                // 加入清單 測試另一種function寫法是否可用
+                function add() {
+                    console.log('add')
+                    if (inputCheck.value === 'success') {
+                        todos.push({
+                            id: id++,
+                            text: input.value,
+                            isDone: false,
+                        })
+                        input.value = ''
+                    }
+                }
+
+                // 刪除清單
+                function remove(id) {
+                    const shouldRemoveIndex = todos.findIndex(todo => todo.id === id)
+                    todos.splice(shouldRemoveIndex, 1)
+                }
+
+                // 模板會使用到的變數需要return出來
+                return {
+                    input, search, inputCheck, add, remove, todos, filteredTodos
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
