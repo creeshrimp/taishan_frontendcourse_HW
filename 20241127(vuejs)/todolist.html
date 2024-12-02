@@ -75,16 +75,16 @@
         </form>
         <hr>
         <!-- 搜尋 filter -->
-        <input type="text" v-model="search">
+        <!-- <input type="text" v-model="search"> -->
         <hr>
         <!-- 功能按鈕 -->
         <div id="function_buttons">
             <button>全部標記為已完成</button>
             <button>全部標記為未完成</button>
             <br>
-            <button>顯示全部</button>
-            <button>顯示已完成</button>
-            <button>顯示未完成</button>
+            <button @click="filter = '全部'">顯示全部</button>
+            <button @click="filter = '已完成'">顯示已完成</button>
+            <button @click="filter = '未完成'">顯示未完成</button>
             <br>
             <button>清除全部</button>
             <button>清除已完成</button>
@@ -97,8 +97,16 @@
         <ul class="todoList">
             <li v-for="todo in filteredTodos" :class="todo.isDone ? 'done' : ''">
                 <input type="checkbox" v-model="todo.isDone">
-                <span>{{ todo.text }}</span>
-                <button @click="remove(todo.id)">移除</button>
+                <!-- 編輯中 -->
+                <template v-if="todo.isEditing">
+                    <input type="text" v-model="todo.textTemp" class="todoInput" @keyup.enter="confirmEdit(todo)"
+                        @keydown.esc="cancelEdit(todo)">
+                </template>
+                <!-- 非編輯中 -->
+                <template v-else>
+                    <span @dblclick="todo.isEditing = true">{{ todo.text }}</span>
+                    <button @click="remove(todo.id)">移除</button>
+                </template>
             </li>
         </ul>
     </div>
@@ -108,7 +116,9 @@
             setup() {
                 // ref 所有資型都能使用，但是物件和陣列只能淺層偵測變動，使用時需要加上 .value
                 const input = ref('')
-                const search = ref('')
+                // const search = ref('')
+                const filter = ref('')
+
 
                 // reactive 只有物件和陣列可用，不用加.value，可以深層監聽
                 const todos = reactive([])
@@ -128,24 +138,43 @@
                 // 搜尋過濾
                 const filteredTodos = computed({
                     get() {
-                        return todos.filter(todo => todo.text.includes(search.value))
-                    },
-                    set(newVal) {
+                        // 回傳符合搜尋條件的清單
+                        // [注意] filter() 為淺拷貝，新陣列跟舊陣列不是同一個陣列，但陣列裡的物件指向同一個位址
+                        if (filter.value === '已完成') {
+                            return todos.filter(todo => todo.isDone)
+                        } else if (filter.value === '未完成') {
+                            return todos.filter(todo => !todo.isDone)
+                        } else {
+                            return todos
+                        }
 
-                    }
+                        // return todos.filter(todo => todo.text.includes(search.value))
+                    },
+                    // set(value) {
+                    //     todos = value
+                    // }
 
                 })
 
                 // localStorage
                 // 偵測變動並寫入
                 watch(todos, () => {
+                    console.log('watch todos: ', todos)
                     localStorage.todoList_todos = JSON.stringify(todos)
+                })
+                watch(filter, () => {
+                    console.log("filter: ", filter.value)
+                    localStorage.todoList_filter = filter.value
                 })
 
                 // 在 onMounted 時讀取
                 onMounted(() => {
                     // 從 localStorage 讀取todos，預設值為空陣列
                     const todos_localStorage = JSON.parse(localStorage.todoList_todos || '[]')
+                    // 從 localStorage 讀取filter
+                    const filter_localStorage = localStorage.todoList_filter || '全部'
+                    filter.value = filter_localStorage
+
                     console.log('todos: ', todos_localStorage)
                     todos.splice(0, 0, ...todos_localStorage)
                     // 把id更新為最後一筆+1
@@ -161,6 +190,8 @@
                             id: id++,
                             text: input.value,
                             isDone: false,
+                            isEditing: false,
+                            textTemp: ''
                         })
                         input.value = ''
                     }
@@ -172,9 +203,21 @@
                     todos.splice(shouldRemoveIndex, 1)
                 }
 
+                // 編輯清單
+                function confirmEdit(todo) {
+                    todo.text = todo.textTemp
+                    todo.textTemp = ''
+                    todo.isEditing = false
+                }
+                // 儲存清單
+                function cancelEdit(todo) {
+                    todo.textTemp = ''
+                    todo.isEditing = false
+                }
+
                 // 模板會使用到的變數需要return出來
                 return {
-                    input, search, inputCheck, add, remove, todos, filteredTodos
+                    input, inputCheck, add, remove, todos, filteredTodos, confirmEdit, cancelEdit, filter
                 }
             }
         }).mount('#app')
