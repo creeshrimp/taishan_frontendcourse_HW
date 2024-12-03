@@ -75,27 +75,27 @@
         </form>
         <hr>
         <!-- 搜尋 filter -->
-        <!-- <input type="text" v-model="search"> -->
+        <input type="text" v-model="search">
         <hr>
         <!-- 功能按鈕 -->
         <div id="function_buttons">
-            <button>全部標記為已完成</button>
-            <button>全部標記為未完成</button>
+            <button @click="todosAll('done')">全部標記為已完成</button>
+            <button @click="todosAll('notDone')">全部標記為未完成</button>
             <br>
             <button @click="filter = '全部'">顯示全部</button>
             <button @click="filter = '已完成'">顯示已完成</button>
             <button @click="filter = '未完成'">顯示未完成</button>
             <br>
-            <button>清除全部</button>
-            <button>清除已完成</button>
-            <button>清除未完成</button>
+            <button @click="todosAll('remove')">清除全部</button>
+            <button @click="todosAll('removeDone')">清除已完成</button>
+            <button @click="todosAll('removeNotDone')">清除未完成</button>
         </div>
         <hr>
         <!-- 目前顯示 -->
         目前顯示: <span>{{ filter }}</span>，共 <span>{{ filteredTodos.length }}</span> 個
         <!-- 清單列表 -->
         <ul class="todoList">
-            <li v-for="todo in filteredTodos" :class="todo.isDone ? 'done' : ''">
+            <li v-for="todo in filteredTodos" :class="todo.isDone ? 'done' : ''" :key="todo.id">
                 <input type="checkbox" v-model="todo.isDone">
                 <!-- 編輯中 -->
                 <template v-if="todo.isEditing">
@@ -215,9 +215,32 @@
                     todo.isEditing = false
                 }
 
+                // 全體操作
+                function todosAll(action) {
+                    if (action === 'done') {
+                        todos.forEach(todo => todo.isDone = true)
+                    } else if (action === 'notDone') {
+                        todos.forEach(todo => todo.isDone = false)
+                    }
+                    else if (action === 'remove') {
+                        todos.splice(0)
+                    }
+                    else if (action === 'removeDone') {
+                        // 留下未完成
+                        const notDones = todos.filter(todo => !todo.isDone)
+                        todos.splice(0, todos.length, ...notDones)
+                    }
+                    else if (action === 'removeNotDone') {
+                        // 留下已完成
+                        const dones = todos.filter(todo => todo.isDone)
+                        todos.splice(0, todos.length, ...dones)
+                    }
+                }
+
+
                 // 模板會使用到的變數需要return出來
                 return {
-                    input, inputCheck, add, remove, todos, filteredTodos, confirmEdit, cancelEdit, filter
+                    input, inputCheck, add, remove, todos, filteredTodos, confirmEdit, cancelEdit, filter, todosAll
                 }
             }
         }).mount('#app')
