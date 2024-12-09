@@ -47,6 +47,8 @@
         font-family: '標楷體';
     }
 
+    /* 棋盤 */
+
     #chessboard {
         width: var(--board-width);
         /* aspect-ratio: 1/1; */
@@ -94,6 +96,8 @@
 
     }
 
+    /* 棋子 */
+    #chesses {}
 
     /* util */
     /* 對角線 */
@@ -108,13 +112,12 @@
 
     /* 小螢幕RWD */
     @media screen and (max-width: 600px) {
-        #chessboard {
-            width: 100%;
-            max-width: none;
+        :root {
+            --board-width: 100dvw
         }
 
         .container {
-            width: 100%;
+            /* width: 100%; */
 
             h1 {
                 display: none;
@@ -224,11 +227,12 @@
                 </div>
             </div>
             <!-- 棋子 -->
-            <div id="army">
+            <div id="chesses">
+
                 <!-- 黑棋 -->
-                <div class="black-armys"></div>
+                <!-- <div class="black-armys"></div> -->
                 <!-- 紅棋 -->
-                <div class="red-armys"></div>
+                <!-- <div class="red-armys"></div> -->
             </div>
         </div>
         <!-- 上聯 -->
