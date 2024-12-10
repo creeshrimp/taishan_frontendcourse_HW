@@ -55,6 +55,8 @@
         background-color: rgb(255, 255, 255);
 
         padding: calc(var(--cellWidth) / 2) calc(var(--cellWidth) / 1);
+
+        position: relative;
     }
 
     #board {
@@ -99,14 +101,131 @@
     /* 棋子 */
     #chesses {
 
+        width: calc(var(--cellWidth) * 9);
+        height: calc(var(--cellWidth) * 10);
+
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
         translate: -50% -50%;
 
-        .chess {}
+        display: flex;
+        flex-direction: column;
+
+        .row {
+            width: 100%;
+            height: var(--cellWidth);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .chess {
+                width: calc(var(--cellWidth) * 0.8);
+                height: calc(var(--cellWidth) * 0.8);
+                border: 1px solid black;
+                border-radius: 50%;
+                background: white;
+            }
+
+            .empty {
+                opacity: 0;
+            }
+
+
+        }
     }
 
+    /* 棋子文字 */
+    .b\@7,
+    .b\@6,
+    .b\@5,
+    .b\@4,
+    .b\@3,
+    .b\@2,
+    .b\@1,
+    .r\@7,
+    .r\@6,
+    .r\@5,
+    .r\@4,
+    .r\@3,
+    .r\@2,
+    .r\@1 {
+        font-size: calc(var(--cellWidth) * 0.5);
+        text-align: center;
+        align-content: center;
+    }
+
+    .r\@7,
+    .r\@6,
+    .r\@5,
+    .r\@4,
+    .r\@3,
+    .r\@2,
+    .r\@1 {
+        color: red;
+    }
+
+
+    /* 黑棋 */
+    .b\@7:before {
+        content: "將";
+    }
+
+    .b\@6:before {
+        content: "士";
+    }
+
+    .b\@5:before {
+        content: "象";
+    }
+
+    .b\@4:before {
+        content: "車";
+    }
+
+    .b\@3:before {
+        content: "馬";
+    }
+
+    .b\@2:before {
+        content: "包";
+    }
+
+    .b\@1:before {
+        content: "卒";
+    }
+
+    /* 紅棋 */
+    .r\@7:before {
+        content: "帥";
+    }
+
+    .r\@6:before {
+        content: "士";
+    }
+
+    .r\@5:before {
+        content: "相";
+    }
+
+    .r\@4:before {
+        content: "俥";
+    }
+
+    .r\@3:before {
+        content: "傌";
+    }
+
+    .r\@2:before {
+        content: "炮";
+    }
+
+    .r\@1:before {
+        content: "兵";
+    }
+
+
+    /* ------------------------------------- */
     /* util */
     /* 對角線 */
     .diagonal_tl2br {
@@ -237,6 +356,120 @@
             <!-- 棋子 -->
             <div id="chesses">
 
+                <div class="row">
+                    <div class="chess b@4"></div>
+                    <div class="chess b@3"></div>
+                    <div class="chess b@5"></div>
+                    <div class="chess b@6"></div>
+                    <div class="chess b@7"></div>
+                    <div class="chess b@6"></div>
+                    <div class="chess b@5"></div>
+                    <div class="chess b@3"></div>
+                    <div class="chess b@4"></div>
+                </div>
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess b@2"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess b@2"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <div class="row">
+                    <div class="chess b@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess b@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess b@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess b@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess b@1"></div>
+                </div>
+
+                <!----------------------- 楚河 ----------------------->
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <!----------------------- 漢界 ----------------------->
+
+                <div class="row">
+                    <div class="chess r@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess r@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess r@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess r@1"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess r@1"></div>
+                </div>
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess r@2"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess r@2"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <div class="row">
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                    <div class="chess empty"></div>
+                </div>
+                <div class="row">
+                    <div class="chess r@4"></div>
+                    <div class="chess r@3"></div>
+                    <div class="chess r@5"></div>
+                    <div class="chess r@6"></div>
+                    <div class="chess r@7"></div>
+                    <div class="chess r@6"></div>
+                    <div class="chess r@5"></div>
+                    <div class="chess r@3"></div>
+                    <div class="chess r@4"></div>
+                </div>
                 <!-- 黑棋 -->
                 <!-- <div class="black-armys"></div> -->
                 <!-- 紅棋 -->
