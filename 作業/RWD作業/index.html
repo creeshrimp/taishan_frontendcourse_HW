@@ -15,7 +15,19 @@
             padding: 0;
         }
 
-        #container {}
+        .line {
+            display: block;
+            width: 1px;
+            background-color: black;
+
+            position: absolute;
+            translate: -50% -100%;
+            transform-origin: bottom center;
+        }
+
+        #container {
+            position: relative;
+        }
 
         article {
             /* background: #ffd8d8; */
@@ -53,17 +65,45 @@
         }
 
 
+        /* 電腦版面 */
         @media screen and (min-width: 1024px) {
             #container {
-                article {
+                width: 100vw;
+                height: 100vh;
+
+                /* 主標題電腦版額外調整 */
+                article#main_title {
+                    width: 18rem;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    translate: -50% calc(-50% + 4.6rem);
+
+                    padding: 0;
+
+                    h1,
+                    h2,
+                    p {
+                        margin: 0;
+                    }
+
+                    img {
+                        width: 80%;
+                    }
+                }
+
+                /* 除了主標題以外隱藏文字 */
+                article:not(#main_title) {
                     width: 10%;
+                    position: absolute;
+                    padding: 0;
 
                     img {
                         width: 100%;
                     }
 
                     h1,
-                    section:not(#main_title) {
+                    section {
                         display: none;
                     }
 
@@ -72,16 +112,57 @@
                 /* hr */
                 hr {
                     margin: 0;
-                }
-
-                article:nth-child(1)+hr {
                     display: none;
                 }
 
-                article:nth-of-type(1) {
-                    /* padding: 0;
-                    background-color: black;
-                    width: 40%; */
+                /* article:nth-child(1)+hr {
+                    display: none;
+                } */
+
+                /* 
+                    個別設定 LOGO區塊 位置與細節 
+                */
+
+                /* HTML */
+                article:nth-of-type(2) {
+                    top: 5%;
+                    left: 5%;
+                }
+
+                /* CSS */
+                article:nth-of-type(3) {
+                    top: 3%;
+                    left: 30%;
+                }
+
+                /* JS */
+                article:nth-of-type(4) {
+                    left: 10%;
+                    bottom: 20%;
+                }
+
+                /* jQuery */
+                article:nth-of-type(5) {
+                    left: 25%;
+                    bottom: 5%;
+                }
+
+                /* Bootstrap */
+                article:nth-of-type(6) {
+                    right: 15%;
+                    top: 5%;
+                }
+
+                /* SASS */
+                article:nth-of-type(7) {
+                    right: 5%;
+                    top: 33%;
+                }
+
+                /* VUE.js */
+                article:nth-of-type(8) {
+                    right: 10%;
+                    bottom: 17%;
                 }
             }
         }
@@ -101,7 +182,7 @@
         </article>
         <hr>
         <!-- HTML -->
-        <article>
+        <article id="html">
             <img src="./images/html.png">
             <section>
                 <h2>Html</h2>
@@ -113,7 +194,7 @@
         <hr>
 
         <!-- CSS3 -->
-        <article>
+        <article id="css">
             <img src="./images/css.png">
             <section>
                 <h2>CSS3</h2>
@@ -126,7 +207,7 @@
         <hr>
 
         <!-- JavaScript -->
-        <article>
+        <article id="js">
             <img src="./images/js.png">
             <section>
                 <h2>JavaScript</h2>
@@ -139,7 +220,7 @@
         <hr>
 
         <!-- jQuery -->
-        <article>
+        <article id="jq">
             <img src="./images/jq.png">
             <section>
                 <h2>jQuery</h2>
@@ -153,7 +234,7 @@
         <hr>
 
         <!-- Bootstrap -->
-        <article>
+        <article id="bs">
             <img src="./images/bs.png">
             <section>
                 <h2>Bootstrap</h2>
@@ -167,7 +248,7 @@
         <hr>
 
         <!-- Sass -->
-        <article>
+        <article id="sass">
             <img src="./images/sass.png">
             <section>
                 <h2>Sass</h2>
@@ -179,7 +260,7 @@
         <hr>
 
         <!-- Vue.js -->
-        <article>
+        <article id="vue">
             <img src="./images/vue.png">
             <section>
                 <h2>Vue.js</h2>
@@ -190,6 +271,56 @@
         </article>
         <hr>
     </div>
+
+    <script>
+        let vw = window.innerWidth;
+        let vh = window.innerHeight;
+        let center = {
+            x: vw / 2,
+            y: vh / 2
+        }
+        console.log(vw, vh)
+
+        let articles = document.querySelectorAll('article')
+        for (let i = 0; i < articles.length; i++) {
+            lineTo(articles[i])
+        }
+
+        // onresize
+        // window.onresize = function () {
+        //     vw = window.innerWidth
+        //     vh = window.innerHeight
+        //     center = {
+        //         x: vw / 2,
+        //         y: vh / 2
+        //     }
+
+        //     // 根據各元素畫線
+        //     let articles = document.querySelectorAll('article')
+        //     for (let i = 0; i < articles.length; i++) {
+        //         lineTo(articles[i])
+        //     }
+        // }
+
+        function lineTo(targetElmt) {
+            let rect = targetElmt.getBoundingClientRect()
+            let targetElmtCenter = {
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2
+            }
+            // 計算到中心的距離
+            length = Math.sqrt((targetElmtCenter.x - center.x) ** 2 + (targetElmtCenter.y - center.y) ** 2)
+            // 計算角度
+            angle = Math.atan2(targetElmtCenter.y - center.y, targetElmtCenter.x - center.x)
+
+            // 畫 div
+            let line = document.createElement('div')
+            line.classList.add('line')
+            line.style.height = length + 'px'
+            line.style.transform = `rotate(${angle}rad)`
+            document.body.appendChild(line)
+        }
+    </script>
 </body>
 
 </html>
